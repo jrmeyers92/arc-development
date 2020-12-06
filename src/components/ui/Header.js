@@ -7,6 +7,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import logo from "../../assets/logo.svg";
 
@@ -57,9 +59,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
 	const classes = useStyles();
 	const [value, setValue] = useState(0);
+	const [anchorEl, setAnchorEl] = useState(null);
+	const [open, setOpen] = useState(false);
 
 	const handleChange = (e, value) => {
 		setValue(value);
+	};
+
+	const handleClick = (e) => {
+		setAnchorEl(e.currentTarget);
+		setOpen(true);
+	};
+
+	const handleClose = (e) => {
+		setAnchorEl(null);
+		setOpen(false);
 	};
 
 	useEffect(() => {
@@ -106,6 +120,11 @@ export default function Header(props) {
 								to='/'
 							/>
 							<Tab
+								aria-owns={anchorEl ? "simple-menu" : undefined}
+								aria-haspopup={anchorEl ? "true" : undefined}
+								onClick={(event) => {
+									handleClick(event);
+								}}
 								label='Services'
 								className={classes.tab}
 								component={Link}
@@ -138,6 +157,15 @@ export default function Header(props) {
 							to='estimate'>
 							Free Estimate
 						</Button>
+						<Menu
+							id='simple-menu'
+							anchorEl={anchorEl}
+							open={open}
+							onClose={handleClose}>
+							<MenuItem onClick={handleClose}>
+								Custom Software Developement
+							</MenuItem>
+						</Menu>
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>

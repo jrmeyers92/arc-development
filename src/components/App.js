@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./ui/Header";
 import theme from "./ui/Theme";
 
+const hi = "hello";
+
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
