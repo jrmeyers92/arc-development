@@ -122,7 +122,7 @@ export default function Header(props) {
 							<Tab
 								aria-owns={anchorEl ? "simple-menu" : undefined}
 								aria-haspopup={anchorEl ? "true" : undefined}
-								onClick={(event) => {
+								onMouseOver={(event) => {
 									handleClick(event);
 								}}
 								label='Services'
@@ -161,10 +161,13 @@ export default function Header(props) {
 							id='simple-menu'
 							anchorEl={anchorEl}
 							open={open}
-							onClose={handleClose}>
+							onClose={handleClose}
+							MenuListProps={{ onMouseLeave: handleClose }}>
 							<MenuItem onClick={handleClose}>
 								Custom Software Developement
 							</MenuItem>
+							<MenuItem onClick={handleClose}>Mobile App Developement</MenuItem>
+							<MenuItem onClick={handleClose}>Website Developement</MenuItem>
 						</Menu>
 					</Toolbar>
 				</AppBar>
